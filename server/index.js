@@ -1,19 +1,13 @@
 const express = require('express');
+const routes = require('./routes/routes');
+
 let app = express();
 
 app.use(express.static(__dirname + '/../client/dist'));
 
-app.post('/repos', function (req, res) {
-  // TODO - your code here!
-  // This route should take the github username provided
-  // and get the repo information from the github API, then
-  // save the repo information in the database
-});
+// set up router
+app.use('/', routes);
 
-app.get('/repos', function (req, res) {
-  // TODO - your code here!
-  // This route should send back the top 25 repos
-});
 
 let port = 1128;
 
