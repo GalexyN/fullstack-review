@@ -1,2 +1,9 @@
-POST http://localhost:1128/repos HTTP/1.1
+POST http://localhost:1128/repos
 Content-Type: application/json
+
+###
+GET  http://localhost:1128/repos
+
+###
+GET  http://localhost:1128/deleterepos
+

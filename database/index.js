@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+mongoose.Promise = require('bluebird');
 mongoose.connect('mongodb://localhost/fetcher', { useMongoClient: true });
 
 let repoSchema = mongoose.Schema({
@@ -55,8 +56,13 @@ let save = (data) => {
     .catch(err => conesole.log(err));
 }
 
+const deleteRepo = () => {
+  Repo.remove({}, err => console.log('collection removed'));
+}
+
 module.exports = {
   Repo,
-  save
+  save,
+  deleteRepo
 }
 

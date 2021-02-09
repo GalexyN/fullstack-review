@@ -8,4 +8,6 @@ router.post('/repos', repoRoutes.getReposAndCreate);
 
 router.get('/repos', repoRoutes.getReposFromDatabase);
 
+router.get('/deleterepos', repoRoutes.deleteRepo);
+
 module.exports = router;
