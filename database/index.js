@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const axios = require('axios');
 mongoose.Promise = require('bluebird');
 mongoose.connect('mongodb://localhost/fetcher', { useMongoClient: true });
 
@@ -19,6 +20,18 @@ let repoSchema = mongoose.Schema({
   owner_id: {
     type: Number,
     required: true,
+  },
+  stargazers_count: {
+    type: Number,
+    required: true,
+  },
+  watchers_count: {
+    type: Number,
+    required: true,
+  },
+  forks_count: {
+    type: Number,
+    required: true,
   }
 });
 
@@ -30,8 +43,10 @@ let save = async (data) => {
   // the MongoDB
 
   let processData = new Promise((resolve, reject) => {
-    data.forEach(repo => {
-
+    data.forEach(async repo => {
+      // axios.get(`https://api.github.com/repos/${repo.owner.login}/${repo.name}/contributors`)
+      // .then(response => console.log('axios: ', response))
+      // .catch(err => console.log(err))
       Repo.findOne({ repo_id: repo.id }).exec()
         .then(response => {
           if (!response) {
@@ -39,7 +54,10 @@ let save = async (data) => {
               repo_id: repo.id,
               repo_name: repo.name,
               owner: repo.owner.login,
-              owner_id: repo.owner.id
+              owner_id: repo.owner.id,
+              stargazers_count: repo.stargazers_count,
+              watchers_count: repo.watchers_count,
+              forks_count: repo.forks_count
             })
 
             newRepo.save()
