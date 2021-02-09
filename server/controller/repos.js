@@ -19,8 +19,8 @@ const getReposFromDatabase = (req, res) => {
   // TODO - your code here!
   // This route should send back the top 25 repos
   reposSchema.Repo.find()
-    .then(data => res.sendStatus(201))
-    .catch(err => res.sendStatus(401))
+    .then(data => res.json(data))
+    .catch(err => res.sendStatus(400))
 
 }
 
