@@ -5,8 +5,9 @@ const getReposAndCreate = (req, res) => {
   // This route should take the github username provided
   // and get the repo information from the github API, then
   // save the repo information in the database
+
   return new Promise((resolve, reject) => {
-    reposSchema.save()
+    reposSchema.save(req.body)
   })
   .then(response => res.status(201).send(response))
 }
