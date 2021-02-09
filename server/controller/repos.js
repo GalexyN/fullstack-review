@@ -18,7 +18,7 @@ const getReposAndCreate = async (req, res) => {
 const getReposFromDatabase = (req, res) => {
   // TODO - your code here!
   // This route should send back the top 25 repos
-  reposSchema.Repo.find()
+    reposSchema.Repo.find().sort({ stargazers_count: -1, watchers_count: -1, forks_count: -1 })
     .then(data => res.json(data))
     .catch(err => res.sendStatus(400))
 
