@@ -1,23 +1,26 @@
 const reposSchema = require('../models/ReposSchema.js');
 
-const getReposAndCreate = (req, res) => {
+const getReposAndCreate = async (req, res) => {
   // TODO - your code here!
   // This route should take the github username provided
   // and get the repo information from the github API, then
   // save the repo information in the database
 
-  return new Promise((resolve, reject) => {
-    reposSchema.save(req.body)
-  })
-  .then(response => res.status(201).send(response))
+  let successful = await reposSchema.save(req.body);
+
+  if (successful === 201) {
+    res.sendStatus(201);
+  } else {
+    res.sendStatus(404);
+  }
 }
 
 const getReposFromDatabase = (req, res) => {
   // TODO - your code here!
   // This route should send back the top 25 repos
   reposSchema.Repo.find()
-    .then(data => res.status(201).send(data))
-    .catch(err => res.status(404).send(err))
+    .then(data => res.sendStatus(201))
+    .catch(err => res.sendStatus(401))
 
 }
 
