@@ -1,16 +1,14 @@
 const reposSchema = require('../models/ReposSchema.js');
 
-const getReposAndCreate = async (req, res) => {
+const getReposAndCreate = (req, res) => {
   // TODO - your code here!
   // This route should take the github username provided
   // and get the repo information from the github API, then
   // save the repo information in the database
-  let newRepos = await reposSchema.save();
-
-  res.send(newRepos)
-
-
-
+  return new Promise((resolve, reject) => {
+    reposSchema.save()
+  })
+  .then(response => res.status(201).send(response))
 }
 
 const getReposFromDatabase = (req, res) => {

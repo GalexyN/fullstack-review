@@ -48,9 +48,9 @@ let save = (data) => {
     },
   });
 
-  newRepos.save()
+  return newRepos.save()
     .then(response => {
-      console.log(`successfully created new data in mdb`);
+      console.log(`successfully created new data in mdb: ${response}`);
       return response;
     })
     .catch(err => conesole.log(err));
