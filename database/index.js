@@ -31,20 +31,28 @@ let save = async (data) => {
 
   let processData = new Promise((resolve, reject) => {
     data.forEach(repo => {
-      let newRepo = new Repo({
-        repo_id: repo.id,
-        repo_name: repo.name,
-        owner: repo.owner.login,
-        owner_id: repo.owner.id
-      })
 
-      newRepo.save()
+      Repo.findOne({ repo_id: repo.id }).exec()
         .then(response => {
-          console.log(`Successfully created repo in DB: ${response}`);
+          if (!response) {
+            let newRepo = new Repo({
+              repo_id: repo.id,
+              repo_name: repo.name,
+              owner: repo.owner.login,
+              owner_id: repo.owner.id
+            })
+
+            newRepo.save()
+              .then(response => {
+                console.log(`Successfully created repo: {${response.repo_name}} in DB!`);
+              })
+              .catch(err => {
+                reject(err);
+              });
+          } else {
+            console.log(`repo: {${response.repo_name}} found in DB! Skipping creation of a duplicate`);
+          }
         })
-        .catch(err => {
-          reject(err);
-        });
     });
 
     resolve(201)
