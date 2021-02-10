@@ -21,6 +21,10 @@ let repoSchema = mongoose.Schema({
     type: Number,
     required: true,
   },
+  total_impression_count: {
+    type: Number,
+    required: true,
+  },
   stargazers_count: {
     type: Number,
     required: true,
@@ -59,6 +63,7 @@ let save = async (data) => {
               repo_name: repo.name,
               owner: repo.owner.login,
               owner_id: repo.owner.id,
+              total_impression_count: repo.stargazers_count + repo.watchers_count + repo.forks_count,
               stargazers_count: repo.stargazers_count,
               watchers_count: repo.watchers_count,
               forks_count: repo.forks_count,

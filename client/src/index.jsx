@@ -5,6 +5,7 @@ import Search from './components/Search.jsx';
 import RepoList from './components/RepoList.jsx';
 import { getReposByUsername } from '../../helpers/github.js';
 import axios from 'axios';
+import './index.css';
 
 
 class App extends React.Component {
@@ -19,9 +20,9 @@ class App extends React.Component {
 
   componentDidMount() {
     axios.get('/repos')
-    .then(response => {
-      this.setState({ repos: response.data })
-    })
+      .then(response => {
+        this.setState({ repos: response.data })
+      })
   }
 
   async search(term) {
@@ -33,30 +34,32 @@ class App extends React.Component {
 
     if (successfulCreation) {
       axios.get('/repos')
-      .then(response => {
-        this.setState({ repos: response.data }, () => {
-          if (prevStateRepoLength === this.state.repos.length) {
-            console.log('successfully searched but the searched repos were duplicates so they were not created!')
-          } else {
-            console.log('successfully searched / created repos in database!');
-          }
+        .then(response => {
+          console.log('response data: ', response)
+          this.setState({ repos: response.data }, () => {
+            if (prevStateRepoLength === this.state.repos.length) {
+              console.log('successfully searched but the searched repos were duplicates so they were not created!')
+            } else {
+              console.log('successfully searched / created repos in database!');
+            }
+          })
         })
-      })
     } else {
       console.log('there was an error creating / searching for repos!')
     }
-
   }
 
   render() {
     const { repos } = this.state;
 
     return (
-    <div>
-      <h1>Github Fetcher</h1>
-      <RepoList repos={repos}/>
-      <Search onSearch={this.search.bind(this)}/>
-    </div>
+      <div>
+        <h1>Github Fetcher</h1>
+        <div>
+          <RepoList repos={repos} />
+          <Search onSearch={this.search.bind(this)} />
+        </div>
+      </div>
     )
   }
 }

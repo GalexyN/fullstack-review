@@ -29,15 +29,19 @@ class RepoList extends Component {
   render() {
 
     const top25Repos = this.state.repos.slice(0, 25);
+    const { repos } = this.state;
 
     return (
       <div>
         <h4> Repo List Component </h4>
-      There are {top25Repos.length} repos. <br />
-      Here is the list of the 25 repos by impressions: <br />
+      There is a total of {repos.length} repos. <br />
+      Here is the list of the top 25 repos by impressions: <br />
+      <div>
+
         {top25Repos.map((repo, index) => {
           return <Repo repo={repo} key={index} />
         })}
+        </div>
       </div>
     )
   }
