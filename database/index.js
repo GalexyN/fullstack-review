@@ -32,7 +32,11 @@ let repoSchema = mongoose.Schema({
   forks_count: {
     type: Number,
     required: true,
-  }
+  },
+  html_url: {
+    type: String,
+    required: true,
+  },
 });
 
 let Repo = mongoose.model('Repo', repoSchema);
@@ -57,7 +61,8 @@ let save = async (data) => {
               owner_id: repo.owner.id,
               stargazers_count: repo.stargazers_count,
               watchers_count: repo.watchers_count,
-              forks_count: repo.forks_count
+              forks_count: repo.forks_count,
+              html_url: repo.html_url,
             })
 
             newRepo.save()

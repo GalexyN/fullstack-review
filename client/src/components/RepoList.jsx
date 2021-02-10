@@ -16,11 +16,6 @@ class RepoList extends Component {
     }
   }
 
-  // componentDidMount() {
-  //   console.log('did mountL: ', this.props)
-  //   this.setState({ repos: this.props.repos, value: this.props.countValue})
-  // }
-
   componentDidUpdate(prevProp, prevState) {
     if (prevState.repos !== this.state.repos) {
       console.log('state has changed');
