@@ -24,24 +24,40 @@ class App extends React.Component {
     })
   }
 
-  search(term) {
+  async search(term) {
     console.log(`${term} was searched`);
     // TODO
-    if (getReposByUsername(term)) {
-      console.log('successfully searched and created repos in database!');
+    let prevStateRepoLength = this.state.repos.length;
+
+    let successfulCreation = await getReposByUsername(term);
+
+    if (successfulCreation) {
+      axios.get('/repos')
+      .then(response => {
+        this.setState({ repos: response.data }, () => {
+          if (prevStateRepoLength === this.state.repos.length) {
+            console.log('successfully searched but the searched repos were duplicates so they were not created!')
+          } else {
+            console.log('successfully searched / created repos in database!');
+          }
+        })
+      })
     } else {
       console.log('there was an error creating / searching for repos!')
     }
-    this.setState({ newSearch: !this.state.newSearch });
 
   }
 
   render() {
-    return (<div>
+    const { repos } = this.state;
+
+    return (
+    <div>
       <h1>Github Fetcher</h1>
-      <RepoList repos={this.state.repos} />
-      <Search onSearch={this.search.bind(this)} />
-    </div>)
+      <RepoList repos={repos}/>
+      <Search onSearch={this.search.bind(this)}/>
+    </div>
+    )
   }
 }
 
