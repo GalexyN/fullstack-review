@@ -5,8 +5,6 @@ import Search from './components/Search.jsx';
 import RepoList from './components/RepoList.jsx';
 import { getReposByUsername } from '../../helpers/github.js';
 import axios from 'axios';
-import './index.css';
-
 
 class App extends React.Component {
   constructor(props) {
@@ -35,7 +33,6 @@ class App extends React.Component {
     if (successfulCreation) {
       axios.get('/repos')
         .then(response => {
-          console.log('response data: ', response)
           this.setState({ repos: response.data }, () => {
             if (prevStateRepoLength === this.state.repos.length) {
               console.log('successfully searched but the searched repos were duplicates so they were not created!')
@@ -51,13 +48,25 @@ class App extends React.Component {
 
   render() {
     const { repos } = this.state;
+    const headerStyle = {
+      width: '100%',
+      textAlign: 'center',
+    }
+    const mainContainerStyle = {
+      width: '100%',
+      textAlign: 'center',
+      display: 'flex',
+      justifyContent: 'center',
+      padding: 'auto 0',
+      margin: 'auto'
+    }
 
     return (
-      <div>
+      <div style={headerStyle}>
         <h1>Github Fetcher</h1>
         <div>
-          <RepoList repos={repos} />
           <Search onSearch={this.search.bind(this)} />
+          <RepoList repos={repos} />
         </div>
       </div>
     )
