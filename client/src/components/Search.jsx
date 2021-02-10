@@ -23,10 +23,6 @@ class Search extends React.Component {
     document.getElementsByTagName('input')[0].value = '';
   }
 
-  handleClick() {
-    this.setState({ term: '' })
-  }
-
   render() {
     const styles = {
 
