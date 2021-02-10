@@ -20,6 +20,11 @@ class Search extends React.Component {
   search(e) {
     e.preventDefault();
     this.props.onSearch(this.state.term);
+    document.getElementsByTagName('input')[0].value = '';
+  }
+
+  handleClick() {
+    this.setState({ term: '' })
   }
 
   render() {
