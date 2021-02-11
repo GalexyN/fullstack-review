@@ -6,6 +6,8 @@ import RepoList from './components/RepoList.jsx';
 import { getReposByUsername } from '../../helpers/github.js';
 import axios from 'axios';
 
+//style https://coolors.co/006d77-83c5be-edf6f9-ffddd2-e29578
+
 class App extends React.Component {
   constructor(props) {
     super(props);
