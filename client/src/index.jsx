@@ -78,7 +78,15 @@ class App extends React.Component {
 
     const middleContainerStyle = {
       backgroundColor: '#83C5BE',
-      padding: '10px'
+      padding: '2.5px 5px 2.5px 0',
+      width: '100%',
+      display: 'flex',
+      justifyContent: 'center',
+      searchStyle: {
+        backgroundColor: '#83C5BE',
+        padding: '5px',
+        width: '100%',
+      }
     }
 
     return (
@@ -86,7 +94,11 @@ class App extends React.Component {
         <h1 style={navBarStyle}>Github Fetcher</h1>
         <div style={headerStyle}>
           <div style={middleContainerStyle}>
-            <h4>{this.state.repoChangeMessage}</h4>
+            <h4 style={middleContainerStyle}>Top User</h4>
+            <h4 style={middleContainerStyle}>{this.state.repoChangeMessage}</h4>
+            <h4 style={middleContainerStyle}>Fate Repo</h4>
+          </div>
+          <div style={middleContainerStyle.searchStyle}>
             <Search onSearch={this.search.bind(this)} />
           </div>
           <div>

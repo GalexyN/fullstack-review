@@ -58,8 +58,8 @@ class RepoList extends Component {
     return (
       <div>
         {/* <h4> Repo List Component </h4> */}
-      There is a total of {repos.length} repos. <br />
-      Here is the list of the top 25 repos by impressions: <br />
+      There is a total of <u>{repos.length}</u> repos. <br />
+      Here is the list of the <em>top 25</em> repos by impressions: <br />
         <div style={repoListContainerItemsDiv}>
           <h5 style={repoListContainerItems}>USERNAME:id</h5>
           <h5 style={repoListContainerItems}>REPONAME:id</h5>
