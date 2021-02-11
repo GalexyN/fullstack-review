@@ -5,7 +5,7 @@ const dataStyle = {
   textAlign: 'center',
   display: 'flex',
   justifyContent: 'center',
-  textDecoration: 'none',
+  textDecoration: 'none !important',
   margin: '5px 0',
   overflow: 'visible',
   onHover: {
@@ -13,15 +13,17 @@ const dataStyle = {
     textAlign: 'center',
     display: 'flex',
     justifyContent: 'center',
-    color: 'blue',
-    textDecoration: 'none',
+    color: '#E29578',
+    textDecoration: 'none !important',
     margin: '5px 0',
     transition: 'all .2s ease-in-out',
     overflow: 'visible',
-
   }
 }
 
+const noStyleOnATag = {
+  textDecoration: 'none !important'
+}
 
 class Repo extends Component {
   constructor(props) {
@@ -45,7 +47,7 @@ class Repo extends Component {
     return (
       <div style={dataStyle}>
         <h5 style={this.state.hover ? dataStyle.onHover : dataStyle} onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave}>{this.props.repo.owner}:{this.props.repo.owner_id}</h5>
-        <h5 style={this.state.hover ? dataStyle.onHover : dataStyle} onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave}><a href={this.props.repo.html_url}>{this.props.repo.repo_name}:{this.props.repo.repo_id}</a></h5>
+        <h5 style={this.state.hover ? dataStyle.onHover : dataStyle} onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave}><a href={this.props.repo.html_url} style={noStyleOnATag}>{this.props.repo.repo_name}:{this.props.repo.repo_id}</a></h5>
         <h5 style={this.state.hover ? dataStyle.onHover : dataStyle} onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave}>{this.props.repo.total_impression_count}</h5>
       </div>
     )

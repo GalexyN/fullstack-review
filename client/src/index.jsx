@@ -67,7 +67,8 @@ class App extends React.Component {
       display: 'flex',
       justifyContent: 'center',
       padding: 'auto 0',
-      margin: 'auto'
+      margin: 'auto',
+      textDecoration: 'none !important'
     }
 
     const navBarStyle = {
