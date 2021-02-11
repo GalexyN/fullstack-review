@@ -73,11 +73,7 @@ class App extends React.Component {
 
     const navBarStyle = {
       position: 'float',
-      color: '#006D77',
-      fetcher: {
-        position: 'float',
-        color: '#83C5BE'
-      }
+      color: '#006D77'
     }
 
     const middleContainerStyle = {
@@ -95,7 +91,7 @@ class App extends React.Component {
 
     return (
       <div>
-        <h1 style={navBarStyle}>Github</h1><h1 style={navBarStyle.fetcher}>Fetcher</h1>
+        <h1 style={navBarStyle}>Github <u>Fetcher</u></h1>
         <div style={headerStyle}>
           <div style={middleContainerStyle}>
             <h3 style={middleContainerStyle}>Top User</h3>
