@@ -61,9 +61,9 @@ class RepoList extends Component {
       There is a total of <u>{repos.length}</u> repos. <br />
       Here is the list of the <em>top 25</em> repos by impressions: <br />
         <div style={repoListContainerItemsDiv}>
-          <h5 style={repoListContainerItems}>USERNAME:id</h5>
-          <h5 style={repoListContainerItems}>REPONAME:id</h5>
-          <h5 style={repoListContainerItems}>TOTAL IMPRESSIONS</h5>
+          <h3 style={repoListContainerItems}>USERNAME:id</h3>
+          <h3 style={repoListContainerItems}>REPONAME:id</h3>
+          <h3 style={repoListContainerItems}>TOTAL IMPRESSIONS</h3>
         </div>
         <div style={repoListContainer}>
 

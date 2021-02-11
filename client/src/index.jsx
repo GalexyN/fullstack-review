@@ -74,11 +74,15 @@ class App extends React.Component {
     const navBarStyle = {
       position: 'float',
       color: '#006D77',
+      fetcher: {
+        position: 'float',
+        color: '#83C5BE'
+      }
     }
 
     const middleContainerStyle = {
       backgroundColor: '#83C5BE',
-      padding: '2.5px 5px 2.5px 0',
+      padding: '2.5px 5px 2.5px auto',
       width: '100%',
       display: 'flex',
       justifyContent: 'center',
@@ -91,12 +95,12 @@ class App extends React.Component {
 
     return (
       <div>
-        <h1 style={navBarStyle}>Github Fetcher</h1>
+        <h1 style={navBarStyle}>Github</h1><h1 style={navBarStyle.fetcher}>Fetcher</h1>
         <div style={headerStyle}>
           <div style={middleContainerStyle}>
-            <h4 style={middleContainerStyle}>Top User</h4>
-            <h4 style={middleContainerStyle}>{this.state.repoChangeMessage}</h4>
-            <h4 style={middleContainerStyle}>Fate Repo</h4>
+            <h3 style={middleContainerStyle}>Top User</h3>
+            <h3 style={middleContainerStyle}>{this.state.repoChangeMessage}</h3>
+            <h3 style={middleContainerStyle}>Fate Repo</h3>
           </div>
           <div style={middleContainerStyle.searchStyle}>
             <Search onSearch={this.search.bind(this)} />

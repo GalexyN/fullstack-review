@@ -32,14 +32,14 @@ class Repo extends Component {
       hover: false,
     }
     this.handleMouseEnter = this.handleMouseEnter.bind(this);
-    this.handleMouseEnter = this.handleMouseEnter.bind(this);
+    this.handleMouseLeave = this.handleMouseLeave.bind(this);
   }
 
-  handleMouseEnter() {
+  handleMouseEnter(e) {
     this.setState({ hover: !this.state.hover });
   }
 
-  handleMouseLeave() {
+  handleMouseLeave(e) {
     this.setState({ hover: !this.state.hover });
   }
 
