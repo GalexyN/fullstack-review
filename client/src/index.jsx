@@ -73,14 +73,20 @@ class App extends React.Component {
       color: '#006D77',
     }
 
+    const middleContainerStyle = {
+      backgroundColor: '#83C5BE',
+      padding: '10px'
+    }
+
     return (
       <div>
         <h1 style={navBarStyle}>Github Fetcher</h1>
         <div style={headerStyle}>
-
-          <h4>{this.state.repoChangeMessage}</h4>
-          <div>
+          <div style={middleContainerStyle}>
+            <h4>{this.state.repoChangeMessage}</h4>
             <Search onSearch={this.search.bind(this)} />
+          </div>
+          <div>
             <RepoList repos={repos} />
           </div>
         </div>

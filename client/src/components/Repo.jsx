@@ -44,21 +44,9 @@ class Repo extends Component {
   render() {
     return (
       <div style={dataStyle}>
-        <div style={dataStyle}>
-          <div style={dataStyle}></div>
-          <h5 style={this.state.hover ? dataStyle.onHover : dataStyle} onMouseOver={this.handleMouseEnter} onMouseOut={this.handleMouseLeave}>{this.props.repo.owner}:{this.props.repo.owner_id}</h5>
-          <div style={dataStyle}></div>
-        </div>
-        <div style={dataStyle}>
-          <div style={dataStyle}></div>
-          <h5 style={this.state.hover ? dataStyle.onHover : dataStyle} onMouseOver={this.handleMouseEnter} onMouseOut={this.handleMouseLeave}><a href={this.props.repo.html_url}>{this.props.repo.repo_name}:{this.props.repo.repo_id}</a></h5>
-          <div style={dataStyle}></div>
-        </div>
-        <div style={dataStyle}>
-          <div style={dataStyle}></div>
-          <h5 style={this.state.hover ? dataStyle.onHover : dataStyle} onMouseOver={this.handleMouseEnter} onMouseOut={this.handleMouseLeave}>{this.props.repo.total_impression_count}</h5>
-          <div style={dataStyle}></div>
-        </div>
+        <h5 style={this.state.hover ? dataStyle.onHover : dataStyle} onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave}>{this.props.repo.owner}:{this.props.repo.owner_id}</h5>
+        <h5 style={this.state.hover ? dataStyle.onHover : dataStyle} onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave}><a href={this.props.repo.html_url}>{this.props.repo.repo_name}:{this.props.repo.repo_id}</a></h5>
+        <h5 style={this.state.hover ? dataStyle.onHover : dataStyle} onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave}>{this.props.repo.total_impression_count}</h5>
       </div>
     )
   }
