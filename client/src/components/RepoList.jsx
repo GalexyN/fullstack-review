@@ -31,11 +31,27 @@ class RepoList extends Component {
     const top25Repos = this.state.repos.slice(0, 25);
     const { repos } = this.state;
 
-    const repoListContainer = {
+    const repoListContainerItems = {
       width: '100%',
       textAlign: 'center',
       display: 'flex',
       justifyContent: 'center',
+      borderBottomStyle: 'solid',
+      borderWidth: 'thin'
+    }
+
+    const repoListContainer = {
+      overflow: 'auto',
+      height: '500px',
+      color: '#83C5BE',
+    }
+    const repoListContainerItemsDiv = {
+      width: '100%',
+      textAlign: 'center',
+      display: 'flex',
+      justifyContent: 'center',
+      borderBottomStyle: 'none'
+
     }
 
     return (
@@ -43,14 +59,17 @@ class RepoList extends Component {
         {/* <h4> Repo List Component </h4> */}
       There is a total of {repos.length} repos. <br />
       Here is the list of the top 25 repos by impressions: <br />
+      <div style={repoListContainerItemsDiv}>
+            <h5 style={repoListContainerItems}>USERNAME:id</h5>
+            <h5 style={repoListContainerItems}>REPONAME:id</h5>
+            <h5 style={repoListContainerItems}>TOTAL IMPRESSIONS</h5>
+          </div>
         <div style={repoListContainer}>
-          <h5 style={repoListContainer}>USERNAME:id</h5>
-          <h5 style={repoListContainer}>REPONAME:id</h5>
-          <h5 style={repoListContainer}>TOTAL IMPRESSIONS</h5>
+
+          {top25Repos.map((repo, index) => {
+            return <Repo repo={repo} key={index} />
+          })}
         </div>
-        {top25Repos.map((repo, index) => {
-          return <Repo repo={repo} key={index} />
-        })}
       </div>
     )
   }

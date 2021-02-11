@@ -12,6 +12,8 @@ class App extends React.Component {
     this.state = {
       repos: [],
       newSearch: false,
+      newRepos: 0,
+      repoChangeMessage: 'Add more Repos!',
     }
     this.search = this.search.bind(this);
   }
@@ -33,11 +35,16 @@ class App extends React.Component {
     if (successfulCreation) {
       axios.get('/repos')
         .then(response => {
+          console.log(response)
           this.setState({ repos: response.data }, () => {
             if (prevStateRepoLength === this.state.repos.length) {
-              console.log('successfully searched but the searched repos were duplicates so they were not created!')
+              console.log('successfully searched but the searched repos were duplicates so they were not created!');
+              this.setState({ repoChangeMessage: `{${term}}'s repos are already in the database or has no public repos!` })
             } else {
               console.log('successfully searched / created repos in database!');
+              this.setState({ newRepos: this.state.repos.length - prevStateRepoLength }, () =>
+                this.setState({ repoChangeMessage: `You added ${this.state.newRepos} new repos!` })
+              )
             }
           })
         })
@@ -47,7 +54,7 @@ class App extends React.Component {
   }
 
   render() {
-    const { repos } = this.state;
+    const { repos, queriedUser } = this.state;
     const headerStyle = {
       width: '100%',
       textAlign: 'center',
@@ -61,12 +68,21 @@ class App extends React.Component {
       margin: 'auto'
     }
 
+    const navBarStyle = {
+      position: 'float',
+      color: '#006D77',
+    }
+
     return (
-      <div style={headerStyle}>
-        <h1>Github Fetcher</h1>
-        <div>
-          <Search onSearch={this.search.bind(this)} />
-          <RepoList repos={repos} />
+      <div>
+        <h1 style={navBarStyle}>Github Fetcher</h1>
+        <div style={headerStyle}>
+
+          <h4>{this.state.repoChangeMessage}</h4>
+          <div>
+            <Search onSearch={this.search.bind(this)} />
+            <RepoList repos={repos} />
+          </div>
         </div>
       </div>
     )

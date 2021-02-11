@@ -15,15 +15,19 @@ const getReposAndCreate = async (req, res) => {
   }
 }
 
-const getReposFromDatabase = (req, res) => {
+const getReposFromDatabase = async (req, res) => {
   // TODO - your code here!
   // This route should send back the top 25 repos
-    reposSchema.Repo.find().sort({
+    let getRepos = reposSchema.Repo.find({}).sort({
       total_impression_count: -1,
     })
-    .then(data => res.json(data))
+    .then(data => data)
     .catch(err => res.sendStatus(400))
 
+    let allReposSorted = await getRepos;
+    allReposSorted = JSON.parse(JSON.stringify(allReposSorted));
+
+    res.send(allReposSorted);
 }
 
 const deleteRepo = (req, res) => {
