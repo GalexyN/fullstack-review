@@ -45,6 +45,7 @@ class RepoList extends Component {
       height: '500px',
       color: '#83C5BE',
     }
+
     const repoListContainerItemsDiv = {
       width: '100%',
       textAlign: 'center',
@@ -59,11 +60,11 @@ class RepoList extends Component {
         {/* <h4> Repo List Component </h4> */}
       There is a total of {repos.length} repos. <br />
       Here is the list of the top 25 repos by impressions: <br />
-      <div style={repoListContainerItemsDiv}>
-            <h5 style={repoListContainerItems}>USERNAME:id</h5>
-            <h5 style={repoListContainerItems}>REPONAME:id</h5>
-            <h5 style={repoListContainerItems}>TOTAL IMPRESSIONS</h5>
-          </div>
+        <div style={repoListContainerItemsDiv}>
+          <h5 style={repoListContainerItems}>USERNAME:id</h5>
+          <h5 style={repoListContainerItems}>REPONAME:id</h5>
+          <h5 style={repoListContainerItems}>TOTAL IMPRESSIONS</h5>
+        </div>
         <div style={repoListContainer}>
 
           {top25Repos.map((repo, index) => {
