@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
 const axios = require('axios');
+require('dotenv').config();
 mongoose.Promise = require('bluebird');
-mongoose.connect('mongodb://localhost/fetcher', { useMongoClient: true });
+mongoose.connect(process.env.DB_URI, { useMongoClient: true });
 
 let repoSchema = mongoose.Schema({
   // TODO: your schema here!
