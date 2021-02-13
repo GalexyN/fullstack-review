@@ -1,13 +1,6 @@
 import React, { Component } from 'react';
 import Repo from './Repo.jsx';
 
-// const RepoList = (props) => (
-//   {componentWillReceiveProps(nextProps) {
-//     this.setState({ repos: nextProps.repos });
-//   }}
-
-// )
-
 class RepoList extends Component {
   constructor(props) {
     super(props);
@@ -31,41 +24,14 @@ class RepoList extends Component {
     const top25Repos = this.state.repos.slice(0, 25);
     const { repos } = this.state;
 
-    const repoListContainerItems = {
-      width: '100%',
-      textAlign: 'center',
-      display: 'flex',
-      justifyContent: 'center',
-      borderBottomStyle: 'solid',
-      borderWidth: 'thin'
-    }
-
-    const repoListContainer = {
-      overflow: 'auto',
-      height: '500px',
-      color: '#83C5BE',
-    }
-
-    const repoListContainerItemsDiv = {
-      width: '100%',
-      textAlign: 'center',
-      display: 'flex',
-      justifyContent: 'center',
-      borderBottomStyle: 'none'
-
-    }
-
     return (
       <div>
-        {/* <h4> Repo List Component </h4> */}
-      There is a total of <u>{repos.length}</u> repos. <br />
-      Here is the list of the <em>top 25</em> repos by impressions: <br />
-        <div style={repoListContainerItemsDiv}>
-          <h3 style={repoListContainerItems}>USERNAME:id</h3>
-          <h3 style={repoListContainerItems}>REPONAME:id</h3>
-          <h3 style={repoListContainerItems}>TOTAL IMPRESSIONS</h3>
+        <div className="repo--container headers">
+            <h3>USERNAME:id</h3>
+            <h3>REPONAME:id</h3>
+            <h3>TOTAL IMPRESSIONS</h3>
         </div>
-        <div style={repoListContainer}>
+        <div>
 
           {top25Repos.map((repo, index) => {
             return <Repo repo={repo} key={index} />

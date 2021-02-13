@@ -5,6 +5,7 @@ import Search from './components/Search.jsx';
 import RepoList from './components/RepoList.jsx';
 import { getReposByUsername } from '../../helpers/github.js';
 import axios from 'axios';
+import UserList from './components/UserList.jsx'
 
 //style https://coolors.co/006d77-83c5be-edf6f9-ffddd2-e29578
 
@@ -16,6 +17,7 @@ class App extends React.Component {
       newSearch: false,
       newRepos: 0,
       repoChangeMessage: 'Add more Repos!',
+      topUser: '',
     }
     this.search = this.search.bind(this);
   }
@@ -56,52 +58,22 @@ class App extends React.Component {
   }
 
   render() {
-    const { repos, queriedUser } = this.state;
-    const headerStyle = {
-      width: '100%',
-      textAlign: 'center',
-    }
-    const mainContainerStyle = {
-      width: '100%',
-      textAlign: 'center',
-      display: 'flex',
-      justifyContent: 'center',
-      padding: 'auto 0',
-      margin: 'auto',
-      textDecoration: 'none !important'
-    }
-
-    const navBarStyle = {
-      position: 'float',
-      color: '#006D77'
-    }
-
-    const middleContainerStyle = {
-      backgroundColor: '#83C5BE',
-      padding: '2.5px 5px 2.5px auto',
-      width: '100%',
-      display: 'flex',
-      justifyContent: 'center',
-      searchStyle: {
-        backgroundColor: '#83C5BE',
-        padding: '5px',
-        width: '100%',
-      }
-    }
+    const { repos } = this.state;
 
     return (
       <div>
-        <h1 style={navBarStyle}>Github <u>Fetcher</u></h1>
-        <div style={headerStyle}>
-          <div style={middleContainerStyle}>
-            <h3 style={middleContainerStyle}>Top User</h3>
-            <h3 style={middleContainerStyle}>{this.state.repoChangeMessage}</h3>
-            <h3 style={middleContainerStyle}>Fate Repo</h3>
-          </div>
-          <div style={middleContainerStyle.searchStyle}>
-            <Search onSearch={this.search.bind(this)} />
+        <h1 className="navbar">Github <u>Fetcher</u></h1>
+        <div className="container">
+          <div>
+            <h2>{this.state.repoChangeMessage}</h2>
           </div>
           <div>
+            <Search onSearch={this.search.bind(this)} />
+      There is a total of <u>{repos.length}</u> repos. <br />
+      Here is the list of the <u>top 25</u> repos by impressions: <br />
+          </div>
+          <div className="userAndRepoContainer">
+            <UserList />
             <RepoList repos={repos} />
           </div>
         </div>

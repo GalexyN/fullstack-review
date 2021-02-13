@@ -24,16 +24,9 @@ class Search extends React.Component {
   }
 
   render() {
-    const styles = {
-
-    }
-
-    const placeholderStyles = {
-      textAlign: 'center',
-    }
 
     return (<div>
-      <input style={placeholderStyles} value={this.state.terms} placeholder="enter github username" size={'Enter GitHub Username'.length} onChange={this.onChange}/>
+      <input value={this.state.terms} placeholder="enter github username" size={'Enter GitHub Username'.length} onChange={this.onChange}/>
       <button onClick={this.search}> Add Repos </button>
     </div>)
   }
