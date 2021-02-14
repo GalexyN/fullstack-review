@@ -46,54 +46,59 @@ let repoSchema = mongoose.Schema({
 
 let Repo = mongoose.model('Repo', repoSchema);
 
-let save = async (data) => {
+let save = (data) => {
   // TODO: Your code here
   // This function should save a repo or repos to
   // the MongoDB
 
-  let processData = new Promise((resolve, reject) => {
-    data.forEach(async repo => {
-      // axios.get(`https://api.github.com/repos/${repo.owner.login}/${repo.name}/contributors`)
-      // .then(response => console.log('axios: ', response))
-      // .catch(err => console.log(err))
-      Repo.findOne({ repo_id: repo.id }).exec()
-        .then(response => {
-          if (!response) {
-            let newRepo = new Repo({
-              repo_id: repo.id,
-              repo_name: repo.name,
-              owner: repo.owner.login,
-              owner_id: repo.owner.id,
-              total_impression_count: repo.stargazers_count + repo.watchers_count + repo.forks_count,
-              stargazers_count: repo.stargazers_count,
-              watchers_count: repo.watchers_count,
-              forks_count: repo.forks_count,
-              html_url: repo.html_url,
-            })
+  let promises = data.map(async repo => {
+    let result = await(processData(repo))
+    return new Promise((resolve, reject) => {
+      resolve(result)
+    })
+  })
 
-            newRepo.save()
-              .then(response => {
-                console.log(`Successfully created repo: {${response.repo_name}} in DB!`);
-              })
-              .catch(err => {
-                reject(err);
-              });
-          } else {
-            console.log(`repo: {${response.repo_name}} found in DB! Skipping creation of a duplicate`);
-          }
-        })
-    });
-
-    resolve(201)
-  });
-
-  let successful = await processData;
-
-  return successful === 201 ? 201 : 404;
+  return Promise.all(promises)
+  .then(() => 201)
+  .catch(err => 404)
 }
+
 
 const deleteRepo = () => {
   Repo.remove({}, err => console.log('collection removed'));
+}
+
+const processData = (repo) => {
+  return new Promise((resolve, reject) => {
+
+    Repo.findOne({ repo_id: repo.id })
+      .exec()
+      .then(response => {
+        if (!response) {
+          let newRepo = new Repo({
+            repo_id: repo.id,
+            repo_name: repo.name,
+            owner: repo.owner.login,
+            owner_id: repo.owner.id,
+            total_impression_count: repo.stargazers_count + repo.watchers_count + repo.forks_count,
+            stargazers_count: repo.stargazers_count,
+            watchers_count: repo.watchers_count,
+            forks_count: repo.forks_count,
+            html_url: repo.html_url,
+          })
+
+          resolve(
+            newRepo.save()
+              .then(() => console.log(`Successfully created new entry in Database. Repo name: {${repo.name}}`))
+              .catch(() => console.log('There was an error creating a new entry in the database'))
+          );
+        } else {
+          resolve(
+            console.log(`{${repo.name}} already exists in the database no duplicates!`)
+          );
+        }
+      })
+  })
 }
 
 module.exports = {

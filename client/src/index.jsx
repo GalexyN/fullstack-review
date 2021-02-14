@@ -34,6 +34,10 @@ class App extends React.Component {
     // TODO
     let prevStateRepoLength = this.state.repos.length;
 
+    // return new Promise((resolve, reject) => {
+    //   console.log(getReposByUsername(term)
+    // })
+
     let successfulCreation = await getReposByUsername(term);
 
     if (successfulCreation) {
