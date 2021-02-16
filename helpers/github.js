@@ -19,7 +19,7 @@ let getReposByUsername = async (username) => {
   let successful = await axios(options)
     .then(response => response.data)
     .then(repos => {
-      return axios.post('http://localhost:1128/repos', repos)
+      return axios.post('/repos', repos)
 
     })
     .then(response => {
